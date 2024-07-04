@@ -26,6 +26,7 @@ const endpointSecret = process.env.ENDPOINT_SECRET;
 const locations = require('./locations')
 const types = require('./types')
 const trainings = require('./trainings')
+const cart = require('./cart')
 const morganMiddleware = require("./morganMiddleware");
 app.use(morganMiddleware);
 
@@ -92,7 +93,7 @@ app.get("/", (req, res) => {
 app.use("/api/locations", locations);
 app.use("/api/types", types);
 app.use("/api/trainings", trainings)
-
+app.use("/api/cart", cart)
 app.listen(process.env.API_PORT, function () {
 	debug("listening on " + process.env.API_PORT);
 });
