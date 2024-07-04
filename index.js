@@ -27,6 +27,7 @@ const locations = require('./locations')
 const types = require('./types')
 const trainings = require('./trainings')
 const cart = require('./cart')
+const orders= require('./orders');
 const morganMiddleware = require("./morganMiddleware");
 app.use(morganMiddleware);
 
@@ -67,8 +68,12 @@ app.use(function (req, res, next) {
 	next(); // <-- important!
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+// host static files
+app.use(express.static("client"));
+
+// parse post params sent in body in json format
+app.use(express.json());
+
 
 app.use(
 	cors({
@@ -94,6 +99,7 @@ app.use("/api/locations", locations);
 app.use("/api/types", types);
 app.use("/api/trainings", trainings)
 app.use("/api/cart", cart)
+app.use("/api/orders", orders)
 app.listen(process.env.API_PORT, function () {
 	debug("listening on " + process.env.API_PORT);
 });
